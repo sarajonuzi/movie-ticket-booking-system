@@ -1,4 +1,4 @@
-package com.university.model;
+package com.university.movieticket.model.model;
 
 import com.university.movieticket.service.Bookable;
 

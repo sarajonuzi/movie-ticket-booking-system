@@ -1,6 +1,7 @@
-package com.university.app;
+package com.university.movieticket.model.app;
 
 import com.university.model.*;
+import com.university.movieticket.model.model.*;
 
 public class Main {
     public static void main(String[] args) {
