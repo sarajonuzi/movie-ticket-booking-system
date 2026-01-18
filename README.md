@@ -21,3 +21,8 @@ The project is organized using a clear and modular package structure to improve 
 - Use Case Diagram
 
 UML diagrams were created to visualize the system structure and user interactions.
+
+## How to Run
+1. Clone the repository
+2. Run `mvn clean package`
+3. Run `java -jar target/MovieTicketSystem-1.0-SNAPSHOT.jar`
