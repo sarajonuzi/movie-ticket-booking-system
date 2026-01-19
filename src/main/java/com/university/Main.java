@@ -5,14 +5,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.*;
 
-public class
-Main {
+public class Main {
 
     private static List<Movie> movies = new ArrayList<>();
     private static List<Booking> bookings = new ArrayList<>();
 
     public static void main(String[] args) {
-
 
         loadMoviesFromCSV();
         Scanner sc = new Scanner(System.in);
@@ -21,7 +19,6 @@ Main {
 
             System.out.println("\n===== CINEMA BOOKING SYSTEM =====");
             System.out.println("1. List Movies");
-
             System.out.println("2. Book Ticket");
             System.out.println("3. Booking History");
             System.out.println("4. Cancel Booking");
@@ -38,7 +35,7 @@ Main {
         }
     }
 
-    // Load movies from CSV: id,title,time,seats
+    // CSV format: id,title,time1;time2;time3,seats
     private static void loadMoviesFromCSV() {
         try {
             InputStream is = Main.class.getClassLoader().getResourceAsStream("movies.csv");
@@ -56,11 +53,13 @@ Main {
 
                 int id = Integer.parseInt(data[0]);
                 String title = data[1];
-                String time = data[2];
+                String[] times = data[2].split(";");
                 int seatCount = Integer.parseInt(data[3]);
 
-                ShowTime showTime = new ShowTime(time, seatCount);
-                List<ShowTime> showTimes = List.of(showTime);
+                List<ShowTime> showTimes = new ArrayList<>();
+                for (String t : times) {
+                    showTimes.add(new ShowTime(t, seatCount));
+                }
 
                 Movie movie;
                 if (title.equalsIgnoreCase("Dune")) {
@@ -106,7 +105,23 @@ Main {
             return;
         }
 
-        ShowTime st = selected.getShowTimes().get(0);
+        // Showtimes
+        System.out.println("\nAvailable showtimes:");
+        List<ShowTime> showTimes = selected.getShowTimes();
+
+        for (int i = 0; i < showTimes.size(); i++) {
+            System.out.println((i + 1) + ". " + showTimes.get(i).getTime());
+        }
+
+        System.out.print("Select showtime: ");
+        int timeChoice = sc.nextInt();
+
+        if (timeChoice < 1 || timeChoice > showTimes.size()) {
+            System.out.println("Invalid showtime!");
+            return;
+        }
+
+        ShowTime st = showTimes.get(timeChoice - 1);
 
         System.out.println("\nShowtime: " + st.getTime());
         st.printSeatMap();
@@ -131,6 +146,7 @@ Main {
         System.out.println("\nBooking confirmed!");
         System.out.println("Booking ID: " + booking.getBookingId());
         System.out.println("Movie: " + selected.getTitle());
+        System.out.println("Showtime: " + st.getTime());
         System.out.println("Seat: " + seat.getSeatNumber());
         System.out.println("Price: $" + booking.getPrice());
     }
@@ -164,10 +180,12 @@ Main {
         System.out.print("\nEnter Booking ID to cancel: ");
         int id = sc.nextInt();
 
-        for (Booking b : bookings) {
+        Iterator<Booking> iterator = bookings.iterator();
+        while (iterator.hasNext()) {
+            Booking b = iterator.next();
             if (b.getBookingId() == id) {
                 b.getSeat().cancel();
-                bookings.remove(b);
+                iterator.remove();
                 System.out.println("Booking cancelled successfully!");
                 return;
             }

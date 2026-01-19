@@ -25,16 +25,18 @@ public class ShowTime {
         return seats;
     }
 
-    // Seat map visualization
+    // ✅ BU METOD EKSİKTİ
     public void printSeatMap() {
-        System.out.println("\nSeat Map:");
-        for (Seat s : seats) {
-            if (s.isReserved()) {
+        System.out.println("\n--- Seat Map ---");
+
+        for (Seat seat : seats) {
+            if (seat.isReserved()) {
                 System.out.print("[X] ");
             } else {
-                System.out.print("[" + s.getSeatNumber() + "] ");
+                System.out.print("[" + seat.getSeatNumber() + "] ");
             }
         }
+
         System.out.println();
     }
 }

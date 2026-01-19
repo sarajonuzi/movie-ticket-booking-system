@@ -1,5 +1,5 @@
-1,Inception,20:00,50
-2,Interstellar,21:00,60
-3,Oppenheimer,22:00,70
-4,Dune,23:00,55
-5,Batman,19:00,30
+1,Inception,18:00;20:00;22:00,50
+2,Interstellar,17:00;19:00;21:00,60
+3,Oppenheimer,18:00;20:00;22:00,70
+4,Dune,16:00;20:00;23:00,55
+5,Batman,17:00;19:00;21:00,30
