@@ -24,6 +24,11 @@ UML diagrams were created to visualize the system structure and user interaction
 
 ## How to Run
 1. Clone the repository
+<<<<<<< HEAD
 2. Run'apache-maven-3.9.12\bin\mvn.cmd clean package'
 3. Run `cd target`
 4. Run `java -jar target/MovieTicketSystem-1.0-SNAPSHOT.jar`
+=======
+2. Run `mvn clean package`
+3. Run `java -jar target/MovieTicketSystem-1.0-SNAPSHOT.jar`
+>>>>>>> 559f0f29deed1f926f064fd12241a371e5ac22a6
